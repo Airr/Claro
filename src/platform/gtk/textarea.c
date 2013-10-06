@@ -43,8 +43,8 @@ void cgraphics_textarea_widget_create(widget_t *widget)
 	
 	cgraphics_widget_create(widget);
 	
-	g_signal_connect( G_OBJECT(widget->native), "changed", G_CALLBACK(cgraphics_textarea_changed_handler), widget );
-	g_signal_connect( G_OBJECT(widget->native), "modified-changed", G_CALLBACK(cgraphics_textarea_modified_handler), widget );
+	g_signal_connect( G_OBJECT(widget->ndata), "changed", G_CALLBACK(cgraphics_textarea_changed_handler), widget );
+	g_signal_connect( G_OBJECT(widget->ndata), "modified-changed", G_CALLBACK(cgraphics_textarea_modified_handler), widget );
 }
 
 
