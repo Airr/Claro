@@ -138,8 +138,9 @@ void *block_alloc( block_heap_t *heap )
 		/* keep count */
 		heap->free_elems--;
 		
-		/* debug */
+		/* debug 
 		clog( CL_DEBUG, "block_alloc( heap=%p ) -> %p", heap, fn->data );
+		*/
 		
 		/* return pointer to it */
 		return fn->data;

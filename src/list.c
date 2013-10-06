@@ -23,7 +23,9 @@ block_heap_t *node_heap = 0;
 /* init internal data structures */
 void list_init( )
 {
+	/* DEBUG
 	clog( CL_INFO, "allocating in list_init( );" );
+	*/
 	node_heap = block_heap_create( sizeof(node_t), 10, BH_NOW );
 }
 
