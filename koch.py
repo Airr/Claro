@@ -102,6 +102,7 @@ else:
   # only for gtk backend:
   deps = " gtk+-2.0 gdk-2.0 cairo"
   LINK_FLAGS += " " + ExecProcess("pkg-config --libs" + deps)
+  LINK_FLAGS += "-ldl"
   CC_FLAGS += " " + ExecProcess("pkg-config --cflags" + deps)
   DEFINES += ["_NIX", "PIC"]
   CC_FLAGS += " -Werror"
@@ -611,7 +612,7 @@ def Compile(outputfile, files,
       Exec(Subs("$# -c $# -o $# $#", cc, ccflags, ObjExt(f), f))
       c.success()
     linkCmd += " " + ObjExt(f)
-  Exec(Subs("$# $# -o $# $#", cc, linkflags, ofile, linkCmd))
+  Exec(Subs("$# $# $# -o $#", cc,   linkCmd, linkflags, ofile))
 
 def cmd_claro(ccflags):
   Compile("build/claro", CLARO_FILES, 
@@ -620,7 +621,7 @@ def cmd_claro(ccflags):
           "dll", CC)
 
 def cmd_examples(ccflags):
-  ccflags += ccflags + " -Iinclude"
+  ccflags += ccflags + " -Iinclude -I/usr/include/cairo"
   Compile("build/hello", ["examples/helloworld/hello.c"], ccflags)
   Compile("build/radio", ["examples/radio/radio.c"], ccflags)
   Compile("build/combo", ["examples/combo/combo.c"], ccflags)
