@@ -66,7 +66,7 @@
 - (void)claroResize:(NSNotification *)aNotification
 {
 	NSRect frame = [self frame];
-	widget_set_size( cw, frame.size.width, frame.size.height, 1 );
+	widget_set_size( (object_t *)cw, frame.size.width, frame.size.height, 1 );
 
 #ifndef NO_CAIRO
 	cairo_surface_destroy( cvsw->surface );
@@ -77,12 +77,12 @@
 - (void)claroMove:(NSNotification *)aNotification
 {
 	NSRect frame = [self frame];
-	widget_set_position( cw, frame.origin.x, frame.origin.y, 1 );
+	widget_set_position( (object_t *)cw, frame.origin.x, frame.origin.y, 1 );
 }
 
 - (void)claroClose:(NSNotification *)aNotification
 {
-	widget_destroy( cw );
+	widget_destroy( (object_t *)cw );
 }
 
 
@@ -349,7 +349,7 @@ int cgraphics_canvas_text_width( widget_t *widget, const char *text, int len )
 	ATSUTextLayout layout;
 	Rect r;
 	
-	layout = cgraphics_canvas_internal_create_text_layout( cw, text, len, &textu );
+	layout = cgraphics_canvas_internal_create_text_layout( cw, text, len, textu );
 	
 	ATSUMeasureTextImage( layout, 0, len, 0, 0, &r );
 	
@@ -371,7 +371,7 @@ int cgraphics_canvas_text_display_count( widget_t *widget, const char *text, int
 	ATSUTextLayout layout;
 	UniCharArrayOffset os;
 	
-	layout = cgraphics_canvas_internal_create_text_layout( cw, text, c, &textu );
+	layout = cgraphics_canvas_internal_create_text_layout( cw, text, c, textu );
 	
 	ATSUBreakLine( layout, 0, width<<16, false, &os );
 	
@@ -393,11 +393,11 @@ void cgraphics_canvas_show_text( widget_t *widget, int x, int y, const char *tex
 	
 	STATE_SAVE
 	
-	layout = cgraphics_canvas_internal_create_text_layout( cw, text, len, &textu );
+	layout = cgraphics_canvas_internal_create_text_layout( cw, text, len, textu );
 	
 	STATE_FLIP
 	
-	MoveTo( x, -(y + cw->font_height) );
+	// MoveTo( x, -(y + cw->font_height) );
 	ATSUDrawText( layout, 0, len, kATSUUseGrafPortPenLoc, kATSUUseGrafPortPenLoc );
 	
 	ATSUDisposeTextLayout( layout );

@@ -15,6 +15,8 @@
  * See the LICENSE file for more details.
  */
 
+#include "stdinc.h"
+#include "list.h"
 
 #ifndef _CLARO_BASE_BLOCK_H
 #define _CLARO_BASE_BLOCK_H

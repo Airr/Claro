@@ -27,20 +27,20 @@
 - (void)claroResize:(NSNotification *)aNotification
 {
 	NSRect frame = [self contentRectForFrameRect:[self frame]];
-	widget_set_size( cw, frame.size.width, frame.size.height, 1 );
-	widget_set_content_size( cw, frame.size.width, frame.size.height, 1 );
+	widget_set_size( (object_t *)cw, frame.size.width, frame.size.height, 1 );
+	widget_set_content_size( (object_t *)cw, frame.size.width, frame.size.height, 1 );
 }
 
 - (void)claroMove:(NSNotification *)aNotification
 {
 	NSRect frame = [self frame];
-	widget_set_position( cw, frame.origin.x, frame.origin.y, 1 );
-	widget_set_content_position( cw, 0, 0, 1 );
+	widget_set_position( (object_t *)cw, frame.origin.x, frame.origin.y, 1 );
+	widget_set_content_position( (object_t *)cw, 0, 0, 1 );
 }
 
 - (void)claroClose:(NSNotification *)aNotification
 {
-	widget_destroy( cw );
+	widget_destroy( (object_t *)cw );
 }
 
 - (void)setClaroWidget:(widget_t *)widget
@@ -96,7 +96,7 @@ void cgraphics_window_widget_create( widget_t *widget )
 	
 	[window setClaroWidget:widget];
 	
-	widget_set_content_size( widget, widget->size_req->w, widget->size_req->h, 1 );
+	widget_set_content_size( (object_t *)widget, widget->size_req->w, widget->size_req->h, 1 );
 	
 	[window makeKeyWindow];
 	

@@ -95,7 +95,7 @@ if getHost() == "windows":
 elif getHost() == "macosx":
   INCLUDE_DIRS += ['/usr/local/include/cairo', '/usr/include/cairo', 
                    'include/platform/cocoa']
-  CC_FLAGS += " -fno-common"
+  CC_FLAGS = "-Wno-unused-variable -fno-common"
   LINK_FLAGS += " -framework Carbon -framework Cocoa -dynamiclib"
   DEFINES += ["_MAC", "NO_CAIRO"]
 else:

@@ -16,7 +16,10 @@
 
 #define CELL_AT(I) (lt->heap->index[(I)])
 
-inline void start_cell(layout_t *lt, int isrow) 
+void start_cell(layout_t *lt, int isrow);
+void end_row(layout_t *lt);
+
+void start_cell(layout_t *lt, int isrow) 
 {
     cell_t *cl = NULL;
     
@@ -46,7 +49,7 @@ inline void start_cell(layout_t *lt, int isrow)
  * col.min -- the min is the default minimum for the fixed width cells.
  */
 
-inline void end_row(layout_t *lt)
+void end_row(layout_t *lt)
 {
     cell_t *start = NULL;
     cell_t *cl = NULL;
@@ -93,7 +96,7 @@ inline void end_row(layout_t *lt)
     lt->row.start=0;
 }
 
-inline void update_name(layout_t *lt, char fc)
+void update_name(layout_t *lt, char fc)
 {
     cell_t *cl = layout_heap_top(lt->heap);
 
@@ -103,7 +106,7 @@ inline void update_name(layout_t *lt, char fc)
     cl->name[len+1] = '\0';
 }
 
-inline void flex_row(layout_t *lt) 
+void flex_row(layout_t *lt) 
 {
     cell_t *cl = layout_heap_top(lt->heap);
     cl->flags.flex_h = 1;
@@ -115,7 +118,7 @@ inline void flex_row(layout_t *lt)
  * Sets this cell to have the min width, sets it to be flags.fixed_w, and adds to the layout_t.col.fixed_w total
  * for the end_row function.
  */
-inline void fixed_width(layout_t *lt) 
+void fixed_width(layout_t *lt) 
 {
     cell_t *cl = layout_heap_top(lt->heap);
     assert(!cl->flags.set_w && "You already set this cell with a specific width.  Don't do col(20)<");
@@ -131,7 +134,7 @@ inline void fixed_width(layout_t *lt)
  * Sets this cell to have a specific width [specified as mystuff(40)] and adjusts the
  * total layout_t.col.fixed_w to include this width.
  */
-inline void set_width(layout_t *lt) 
+void set_width(layout_t *lt) 
 {
     cell_t *cl = layout_heap_top(lt->heap);
     assert(!cl->flags.fixed_w && "You already set this cell to fixed width.  Don't do >col(10)");
@@ -147,7 +150,7 @@ inline void set_width(layout_t *lt)
  * Sets this cell to have a specific width [specified as mystuff(40)] and adjusts the
  * total layout_t.col.fixed_w to include this width.
  */
-inline void set_height(layout_t *lt) 
+void set_height(layout_t *lt) 
 {
     cell_t *cl = layout_heap_top(lt->heap);
     assert(!cl->flags.fixed_w && "You already set this cell to fixed width.  Don't do >col(10)");
@@ -160,7 +163,7 @@ inline void set_height(layout_t *lt)
 
 
 // goes back through the whole list of cells and sets the vertical coords based on flex settings
-inline void finish_layout(layout_t *lt) 
+void finish_layout(layout_t *lt) 
 {
     cell_t **cl = NULL;
     size_t i = 0;

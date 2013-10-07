@@ -114,7 +114,7 @@ void cgraphics_menubar_new_item( widget_t *widget, list_item_t *item )
 	image_t *img = item->data[0];
 	
 	if ( item->data[1] == 0 )
-		mitem = [NSMenuItem separatorItem];
+		mitem = (ClaroMenuItem *)[NSMenuItem separatorItem];
 	else
 	{
 		mitem = [[ClaroMenuItem alloc] initWithTitle:[[NSString alloc] initWithCString:item->data[1] encoding:NSUTF8StringEncoding] action:@selector(menuItemHit:) keyEquivalent:@""];

@@ -27,7 +27,9 @@ void *cgraphics_font_from_font( font_t *font )
 
 void cgraphics_widget_set_font( widget_t *widget, font_t *font )
 {
-
+  NSControl *ctl = (NSControl *)widget->native;
+  NSString* name = [NSString stringWithUTF8String:font->face];
+  [ctl setFont:[NSFont fontWithName:name size:font->size]];
 }
 
 int cgraphics_widget_font_string_width( widget_t *w, char *text, int chars )
@@ -45,7 +47,7 @@ int cgraphics_widget_font_string_width( widget_t *w, char *text, int chars )
 	strncpy( tmp, text, chars );
 	tmp[chars] = 0;
 		
-	NSString *str = [NSString stringWithCString:tmp];
+	NSString *str = [NSString stringWithUTF8String:tmp];
 	NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
 					fnt, NSFontAttributeName, nil];
 	NSSize sz = [str sizeWithAttributes:attrs];

@@ -53,7 +53,7 @@ list_item_t *cgraphics_find_list_item_by_id( list_t *list, NSString *id );
 
 - (void)claroClose:(NSNotification *)aNotification
 {
-	widget_destroy( cw );
+	widget_destroy( (object_t *)cw );
 }
 
 - (void)setClaroWidget:(widget_t *)widget

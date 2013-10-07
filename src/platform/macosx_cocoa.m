@@ -176,7 +176,7 @@ void cgraphics_widget_show( widget_t *widget )
 	osparent = [ctl superview];
 	
 	if ( [osparent isKindOfClass:[RBSplitSubview class]] )
-		ctl = osparent;
+		ctl = (NSControl *)osparent;
 	
 	//[parent addSubview: ctl];
 	[ctl setHidden: NO];
@@ -188,7 +188,7 @@ void cgraphics_widget_hide( widget_t *widget )
 	NSView *parent = [ctl superview];
 	
 	if ( [parent isKindOfClass:[RBSplitSubview class]] )
-		ctl = parent;
+		ctl = (NSControl *)parent;
 	
 	/*[ctl retain];
 	[ctl removeFromSuperview];*/
@@ -280,7 +280,7 @@ void cgraphics_update_bounds( object_t *obj )
 	
 	[[ctl superview] setNeedsDisplayInRect:[ctl frame]];
 	[ctl setFrame:frame];
-	[ctl claroResize:frame];
+	// [ctl claroResize:frame];
 	[ctl setNeedsDisplay:YES];
 }
 

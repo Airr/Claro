@@ -46,18 +46,18 @@
 - (void)claroResize:(NSNotification *)aNotification
 {
 	NSRect frame = [[self contentView] frame];
-	widget_set_size( cw, frame.size.width, frame.size.height, 1 );
-	widget_set_position( cw, frame.origin.x, frame.origin.y, 1 );
+	widget_set_size( OBJECT(cw), frame.size.width, frame.size.height, 1 );
+	widget_set_position( OBJECT(cw), frame.origin.x, frame.origin.y, 1 );
 	
-	widget_set_content_size( cw, frame.size.width, frame.size.height, 1 );
-	widget_set_content_position( cw, 0, 0, 1 );
+	widget_set_content_size( OBJECT(cw), frame.size.width, frame.size.height, 1 );
+	widget_set_content_position( OBJECT(cw), 0, 0, 1 );
 	
 	widget_resized_handle( OBJECT(cw), 0 );
 }
 
 - (void)claroClose:(NSNotification *)aNotification
 {
-	widget_destroy( cw );
+	widget_destroy( OBJECT(cw) );
 }
 
 - (void)setClaroWidget:(widget_t *)widget
