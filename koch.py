@@ -613,6 +613,8 @@ def Compile(outputfile, files,
       c.success()
     linkCmd += " " + ObjExt(f)
   Exec(Subs("$# $# $# -o $#", cc,   linkCmd, linkflags, ofile))
+  if cc == "gcc":
+	Exec(Subs("ar rcs -o build/libclaro.a $#",linkCmd))
 
 def cmd_claro(ccflags):
   Compile("build/claro", CLARO_FILES, 
